@@ -1,8 +1,9 @@
-package com.decisiontree;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-import java.util.*;
-import java.io.*;
-import java.math.BigDecimal;
+import classify_id3.DecimalCalculate;
 
 public class Gain {
 	private ArrayList<ArrayList<String>> D = null; // 训练元组
@@ -25,6 +26,7 @@ public class Gain {
 		ArrayList<String> values = new ArrayList<String>();
 		String r = "";
 		for (int i = 0; i < datas.size(); i++) {
+//			System.out.println(attrIndex+"s");
 			r = datas.get(i).get(attrIndex);
 			if (!values.contains(r)) {
 				values.add(r);
@@ -48,7 +50,9 @@ public class Gain {
 		String c = "";
 		ArrayList<String> tuple = null;
 		for (int i = 0; i < datas.size(); i++) {
+
 			tuple = datas.get(i);
+
 			c = tuple.get(attrIndex);
 			if (valueCount.containsKey(c)) {
 				valueCount.put(c, valueCount.get(c) + 1);
@@ -57,6 +61,7 @@ public class Gain {
 			}
 		}
 		return valueCount;
+		
 	}
 
 	/**
@@ -69,6 +74,8 @@ public class Gain {
 	public double infoD(ArrayList<ArrayList<String>> datas) {
 		double info = 0.000;
 		int total = datas.size();
+//		此时datas已经不行
+//		System.out.println(datas.get(1).get(0));
 		Map<String, Integer> classes = valueCounts(datas, attrList.size());
 		Iterator iter = classes.entrySet().iterator();
 		Integer[] counts = new Integer[classes.size()];
@@ -98,6 +105,8 @@ public class Gain {
 		ArrayList<String> t = null;
 		for (int i = 0; i < D.size(); i++) {
 			t = D.get(i);
+//			System.out.println("gain函数里面的datas数据为"+D);//#
+//			System.out.println("gain函数里面的一行数据为"+t);//#
 			if (t.get(attrIndex).equals(value)) {
 				Di.add(t);
 			}
@@ -130,11 +139,14 @@ public class Gain {
 	 * @return 最佳分裂属性的索引
 	 */
 	public int bestGainAttrIndex() {
-		int index = -1;
+		int index = 0;
 		double gain = 0.000;
 		double tempGain = 0.000;
 		for (int i = 0; i < attrList.size(); i++) {
+
 			tempGain = infoD(D) - infoAttr(i);
+
+		
 			if (tempGain > gain) {
 				gain = tempGain;
 				index = i;
