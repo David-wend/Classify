@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class TestDecisionTree {
-	/** 
+     /** 
      * 读取候选属性 
      * @return 候选属性集合 
      * @throws IOException 
