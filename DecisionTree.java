@@ -1,9 +1,12 @@
+package classify_id3;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class DecisionTree {
+	
 	private Integer attrSelMode; // 最佳分裂属性选择模式，1表示以信息增益度量，2表示以信息增益率度量。暂未实现2
 
 	public DecisionTree() {
@@ -52,9 +55,9 @@ public class DecisionTree {
 	public static String maxClass(Map<String, Integer> classes) {
 		String maxC = "";
 		int max = -1;
-		Iterator iter = classes.entrySet().iterator();
+		Iterator<Map.Entry<String, Integer>> iter = classes.entrySet().iterator();
 		for (int i = 0; iter.hasNext(); i++) {
-			Map.Entry entry = (Map.Entry) iter.next();
+			Map.Entry<String, Integer> entry = (Map.Entry<String, Integer>) iter.next();
 			String key = (String) entry.getKey();
 			Integer val = (Integer) entry.getValue();
 			if (val > max) {
@@ -90,8 +93,6 @@ public class DecisionTree {
 		System.out.println(classes);// #
 
 		String maxC = maxClass(classes);
-
-		System.out.println(maxC);// #
 
 		System.out.println("存放分类类型的个数是" + classes.size());
 		System.out.println("剩余特征数为" + attrList.size());
