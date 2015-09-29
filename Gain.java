@@ -107,8 +107,7 @@ public class Gain {
 		ArrayList<String> t = null;
 		for (int i = 0; i < D.size(); i++) {
 			t = D.get(i);
-//			System.out.println("gain函数里面的datas数据为"+D);//#
-//			System.out.println("gain函数里面的一行数据为"+t);//#
+
 			if (t.get(attrIndex).equals(value)) {
 				Di.add(t);
 			}
