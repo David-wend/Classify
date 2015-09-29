@@ -1,3 +1,5 @@
+package classify_id3;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -74,16 +76,16 @@ public class Gain {
 	public double infoD(ArrayList<ArrayList<String>> datas) {
 		double info = 0.000;
 		int total = datas.size();
-//		此时datas已经不行
-//		System.out.println(datas.get(1).get(0));
+
 		Map<String, Integer> classes = valueCounts(datas, attrList.size());
-		Iterator iter = classes.entrySet().iterator();
+		Iterator<Map.Entry<String, Integer>> iter = classes.entrySet().iterator();
 		Integer[] counts = new Integer[classes.size()];
 		for (int i = 0; iter.hasNext(); i++) {
-			Map.Entry entry = (Map.Entry) iter.next();
+			Map.Entry<String, Integer> entry = (Map.Entry<String, Integer>) iter.next();
 			Integer val = (Integer) entry.getValue();
 			counts[i] = val;
 		}
+		
 		for (int i = 0; i < counts.length; i++) {
 			double base = DecimalCalculate.div(counts[i], total, 3);
 			info += (-1) * base * Math.log(base);
@@ -156,3 +158,4 @@ public class Gain {
 	}
 
 }
+
