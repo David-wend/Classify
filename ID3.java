@@ -1,3 +1,5 @@
+package classify_id3;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,6 +8,35 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Id3 {
+
+	/**
+	 * 递归打印树结构
+	 * 
+	 * @param root
+	 *            当前待输出信息的结点
+	 */
+	public static void printTree(TreeNode root) {
+		System.out.println("name:" + root.getName());
+		ArrayList<String> rules = root.getRule();
+		System.out.print("node rules: {");
+		for (int i = 0; i < rules.size(); i++) {
+			System.out.print(rules.get(i) + " ");
+		}
+		System.out.print("}");
+		System.out.println("");
+		ArrayList<TreeNode> children = root.getChild();
+		int size = children.size();
+		if (size == 0) {
+			System.out.println("-->leaf node!<--");
+		} else {
+			System.out.println("size of children:" + children.size());
+			for (int i = 0; i < children.size(); i++) {
+				System.out.print("child " + (i + 1) + " of node "
+						+ root.getName() + ": ");
+				printTree(children.get(i));
+			}
+		}
+	}
 
 	/**
 	 * 文件流读取训练元组
@@ -54,9 +85,13 @@ public class Id3 {
 	}
 
 	public static void main(String[] args) throws IOException {
-		ArrayList<ArrayList<String>> Datas = readFData("d://text.txt");
-		ArrayList<String> features = readFCandAttr("d://feature.txt");
-//		System.out.println(Datas.get(1).get(4));
-		DecisionTree.buildTree(Datas, features);
+
+		ArrayList<ArrayList<String>> Datas = readFData(".//data//text.txt"); 
+		// 读入数据文件，长宽不限，需用table键隔开
+		ArrayList<String> features = readFCandAttr(".//data//feature.txt");
+		// 读入特征文件，长宽不限，需用table键隔开
+		
+		printTree(DecisionTree.buildTree(Datas, features));
+//		DecisionTree.buildTree(Datas, features);
 	}
 }
