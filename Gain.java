@@ -28,7 +28,7 @@ public class Gain {
 		ArrayList<String> values = new ArrayList<String>();
 		String r = "";
 		for (int i = 0; i < datas.size(); i++) {
-//			System.out.println(attrIndex+"s");
+
 			r = datas.get(i).get(attrIndex);
 			if (!values.contains(r)) {
 				values.add(r);
