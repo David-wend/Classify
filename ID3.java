@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class Id3 {
 
+
 	/**
 	 * 递归打印树结构
 	 * 
